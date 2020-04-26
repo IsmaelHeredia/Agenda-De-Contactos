@@ -1,2 +1,10 @@
-# Agenda-De-Contactos
+# Agenda de contactos
  
+Una agenda de contactos en C# para agregar, editar y borrar contactos, todo queda guardado en una  base de datos SQLite3.
+
+Unas imágenes :
+
+![image](https://1.bp.blogspot.com/-R2aEu3fIjgc/Xp8LTOtqlBI/AAAAAAAABNI/lC0IhT7GGo42gcwzSxntIQCouGEJrLTNACLcBGAsYHQ/s1600/adc2.jpg)
+
+
+![image](https://1.bp.blogspot.com/-JLRfYsiJMPw/Xp8LTPLdQNI/AAAAAAAABNM/UxWFp8iDgNot8RWJvui1eq2qrfFRJprwACEwYBhgLKs0DAL1OcqxyOaTvZHtbFdKhRzoIvCyrHcjGdqlZXeCoOlTRA_WHfFhNQMs7PkunAEpR7Ei0Mt3HY3s4vCyqhVYdQexyiuxvv0me36hj7L6_o1vHDtcd9-ddEZXfXHs-aFByWn_a9XjAEtVKLYDLzt2HjOv4dBqqiDQ1slNSeCwhrILfx6MHsVkN8hmvLTM_EJMIQURsNpt37SBBf_7KOE4f1IqkmqxmDnpmJFvnHiSEZqWcG-u1p_N_Ed8WOC25NG4PT1KfUmmVVePfL7K2BGuWx50GeU0xijTLe-OWyTaHkHlix4NUt3eIDEO_aM8UhElZaRKrMhJu-N8t4Qbgi_AhCKmP8ObWQo4tk2BvMIKy7aYyUTjCdLrmVX5_lduB1nLd3QnnfKngScG4wvHcPgJgwIb3ak08P6matsOhDs_pzsFIYHfFZrIEJcTgygb5ThNWPebMix2JCYHm-OyIbnO9Otihxw9w8qAwYCM9lpgS_RTmlMthFENVB6HplfHjmB17JaPMDPR4CkChOU4QS_LiWKJQv3cNbn2rlDOyZh4OOcIWQcm2MwB5brQC7OK1H_bLNQkh9WFB0MI52KSwePySu9pibyhDT_Wdd-Gxs5kw2Jv89AU/s1600/adc1.jpg)
