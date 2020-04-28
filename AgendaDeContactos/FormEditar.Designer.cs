@@ -169,7 +169,9 @@
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.gbDatos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormEditar";
             // 
             // 
