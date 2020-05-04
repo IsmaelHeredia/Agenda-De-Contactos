@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Telerik.WinControls;
+using System.Text.RegularExpressions;
 
 namespace AgendaDeContactos
 {
@@ -32,32 +33,43 @@ namespace AgendaDeContactos
             int id_contacto = Convert.ToInt32(txtID.Text);
             string nombre = txtNombre.Text;
             string direccion = txtDireccion.Text;
-            int telefono = Convert.ToInt32(txtTelefono.Text);
+            int telefono = 0;
+            if (Regex.IsMatch(txtTelefono.Text, @"^\d+$"))
+            {
+                telefono = Convert.ToInt32(txtTelefono.Text);
+            }
             string email = txtEmail.Text;
 
-            Contacto contacto = new Contacto();
-            contacto.Id_contacto = Convert.ToInt32(id_contacto);
-            contacto.Nombre = nombre;
-            contacto.Direccion = direccion;
-            contacto.Telefono = telefono;
-            contacto.Email = email;
-            AccesoDatos datos = new AccesoDatos();
-            if (datos.comprobar_existencia_contacto_editar(id_contacto,nombre))
+            if (id_contacto != 0 && nombre != "" && direccion != "" && telefono != 0 && email != "")
             {
-                RadMessageBox.Show("El nombre ya existe", titulo, MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-            }
-            else
-            {
-                if (datos.editarContacto(contacto))
+                Contacto contacto = new Contacto();
+                contacto.Id_contacto = Convert.ToInt32(id_contacto);
+                contacto.Nombre = nombre;
+                contacto.Direccion = direccion;
+                contacto.Telefono = telefono;
+                contacto.Email = email;
+                AccesoDatos datos = new AccesoDatos();
+                if (datos.comprobar_existencia_contacto_editar(id_contacto, nombre))
                 {
-                    RadMessageBox.Show("El contacto fue editado correctamente", titulo, MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-                    formHome.cargarContactos();
-                    FormAgregar.ActiveForm.Close();
+                    RadMessageBox.Show("El nombre ya existe", titulo, MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
                 }
                 else
                 {
-                    RadMessageBox.Show("Error editando el contacto", titulo, MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                    if (datos.editarContacto(contacto))
+                    {
+                        RadMessageBox.Show("El contacto fue editado correctamente", titulo, MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                        formHome.cargarContactos();
+                        FormAgregar.ActiveForm.Close();
+                    }
+                    else
+                    {
+                        RadMessageBox.Show("Error editando el contacto", titulo, MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                    }
                 }
+            }
+            else
+            {
+                RadMessageBox.Show("Complete los datos del contacto", titulo, MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
             }
         }
 

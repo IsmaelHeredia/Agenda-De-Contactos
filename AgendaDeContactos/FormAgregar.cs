@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Telerik.WinControls;
+using System.Text.RegularExpressions;
 
 namespace AgendaDeContactos
 {
@@ -29,31 +30,43 @@ namespace AgendaDeContactos
         {
             string nombre = txtNombre.Text;
             string direccion = txtDireccion.Text;
-            int telefono = Convert.ToInt32(txtTelefono.Text);
-            string email = txtEmail.Text;
-            AccesoDatos datos = new AccesoDatos();
-            Contacto contacto = new Contacto();
-            contacto.Nombre = nombre;
-            contacto.Direccion = direccion;
-            contacto.Telefono = telefono;
-            contacto.Email = email;
-            if (datos.comprobar_existencia_contacto_crear(nombre))
+            int telefono = 0;
+            if (Regex.IsMatch(txtTelefono.Text, @"^\d+$"))
             {
-                RadMessageBox.Show("El nombre ya existe", titulo, MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                telefono = Convert.ToInt32(txtTelefono.Text);
             }
-            else
-            {
-                if (datos.agregarContacto(contacto))
-                {
-                    RadMessageBox.Show("El contacto fue creado correctamente", titulo, MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-                    formHome.cargarContactos();
-                    FormAgregar.ActiveForm.Close();
+            string email = txtEmail.Text;
 
+            if (nombre != "" && direccion != "" && telefono != 0 && email != "")
+            {
+                AccesoDatos datos = new AccesoDatos();
+                Contacto contacto = new Contacto();
+                contacto.Nombre = nombre;
+                contacto.Direccion = direccion;
+                contacto.Telefono = telefono;
+                contacto.Email = email;
+                if (datos.comprobar_existencia_contacto_crear(nombre))
+                {
+                    RadMessageBox.Show("El nombre ya existe", titulo, MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
                 }
                 else
                 {
-                    RadMessageBox.Show("Error creando el contacto", titulo, MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                    if (datos.agregarContacto(contacto))
+                    {
+                        RadMessageBox.Show("El contacto fue creado correctamente", titulo, MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                        formHome.cargarContactos();
+                        FormAgregar.ActiveForm.Close();
+
+                    }
+                    else
+                    {
+                        RadMessageBox.Show("Error creando el contacto", titulo, MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                    }
                 }
+            }
+            else
+            {
+                RadMessageBox.Show("Complete los datos del contacto", titulo, MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
             }
         }
     }
